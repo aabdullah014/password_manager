@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash
 import requests
 
 auth = Blueprint('auth', __name__)
@@ -33,11 +33,11 @@ def register():
         response = requests.post(url, json = payload)
 
         if len(username) < 4:
-            pass
+            flash('Username must be at least 4 characters!', category = "error")
         elif len(password) < 6:
-            pass
+            flash('Password must be at least 6 characters!', category = "error")
         else:
             #add user to db
-            pass
+            flash('Successfully registered!', category = "success")
 
     return render_template("register.html")
